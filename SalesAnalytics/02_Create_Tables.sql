@@ -1,9 +1,13 @@
+
+
+
 -- SalesAnalytics Project
--- Creates the four core tables.
+-- Creates all six database tables.
 
 USE SalesAnalytics;
 GO
 
+-- 1. Customers table
 CREATE TABLE Customers
 (
     CustomerID INT PRIMARY KEY,
@@ -13,6 +17,7 @@ CREATE TABLE Customers
 );
 GO
 
+-- 2. Products table
 CREATE TABLE Products
 (
     ProductID INT PRIMARY KEY,
@@ -22,6 +27,15 @@ CREATE TABLE Products
 );
 GO
 
+-- 3. Categories table
+CREATE TABLE Categories
+(
+    CategoryID INT PRIMARY KEY,
+    CategoryName VARCHAR(50) NOT NULL
+);
+GO
+
+-- 4. Orders table
 CREATE TABLE Orders
 (
     OrderID INT PRIMARY KEY,
@@ -30,6 +44,7 @@ CREATE TABLE Orders
 );
 GO
 
+-- 5. OrderDetails table
 CREATE TABLE OrderDetails
 (
     OrderDetailID INT PRIMARY KEY,
@@ -37,5 +52,19 @@ CREATE TABLE OrderDetails
     ProductID INT,
     Quantity INT,
     UnitPrice DECIMAL(10,2)
+);
+GO
+
+-- 6. Payment table
+CREATE TABLE Payment
+(
+    PaymentID INT PRIMARY KEY,
+    OrderID INT,
+    PaymentMethod VARCHAR(50) NOT NULL,
+    PaymentDate DATE NOT NULL,
+    Amount DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY (OrderID)
+        REFERENCES Orders(OrderID)
 );
 GO
